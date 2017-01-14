@@ -26,4 +26,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/space', 'SpaceController@get');
+Route::get('/space', 'SpaceController@get')->name('space_list');
+Route::post('/space/create', 'SpaceController@create');
+Route::get('/new/space', 'SpaceController@show_new')->name('new_space');

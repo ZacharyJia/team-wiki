@@ -13,4 +13,9 @@ use Illuminate\Support\Facades\Session;
 class BaseController extends Controller
 {
 
+    public function getLoginUser() {
+        $user = Session::get('user');
+        return $user;
+    }
+
 }
