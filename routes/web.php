@@ -11,6 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use Illuminate\Http\Request;
+
+Route::get('/', function (Request $request) {
+//    return view('welcome');
+
+//    dd($user = Adldap::search()->users()->find('jiazequn'));
+
 });
