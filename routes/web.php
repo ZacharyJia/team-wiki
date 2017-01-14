@@ -14,8 +14,16 @@
 use Illuminate\Http\Request;
 
 Route::get('/', function (Request $request) {
-//    return view('welcome');
+//    return view('home');
 
-//    dd($user = Adldap::search()->users()->find('jiazequn'));
+    ($user = Adldap::search()->users()->find('jiazequn'));
+
+    dd(Adldap::auth()->attempt($user->dn, 'jiazequn'));
 
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
+
+Route::get('/space', 'SpaceController@get');

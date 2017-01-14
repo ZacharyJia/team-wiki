@@ -226,7 +226,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Adldap' => Adldap\Laravel\Facades\Adldap::class,
 
-
     ],
 
 ];

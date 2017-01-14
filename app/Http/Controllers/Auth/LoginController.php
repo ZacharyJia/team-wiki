@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Adldap;
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -35,5 +40,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $user = Adldap::search()->users()->find($username);
+        if (Adldap::auth()->attempt($user->dn, $password)) {
+            Session::set('user', $user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function username() {
+        return 'username';
     }
 }
